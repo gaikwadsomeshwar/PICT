@@ -1,0 +1,46 @@
+A51 MACRO ASSEMBLER  ASSIGNMENT7_III_                                                     03/05/2020 11:33:58 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.00b
+OBJECT MODULE PLACED IN Assignment7(iii).OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE Assignment7(iii).a51 SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000h
+0000 020003            2     LJMP START
+                       3     
+0003                   4     START:
+                       5                     
+0003 E4                6                     CLR A
+                       7                     
+0004 7830              8                     MOV R0,#30h
+0006 7949              9                     MOV R1,#49h
+0008 7A05             10                     MOV R2,#5
+                      11     
+000A E2               12        LOOP:MOVX A,@R0
+000B F3               13                     MOVX @R1,A
+000C 09               14                     INC R1
+000D 08               15                     INC R0
+000E DAFA             16                     DJNZ R2,LOOP            
+                      17     
+0010 80FE             18        HERE:SJMP HERE
+                      19     
+                      20     END
+A51 MACRO ASSEMBLER  ASSIGNMENT7_III_                                                     03/05/2020 11:33:58 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+HERE . . . . . . .  C ADDR   0010H   A   
+LOOP . . . . . . .  C ADDR   000AH   A   
+START. . . . . . .  C ADDR   0003H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

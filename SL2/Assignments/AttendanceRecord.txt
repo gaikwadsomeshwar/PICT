@@ -1,0 +1,11 @@
+================================
+        Attendance Record       
+================================
+Roll No 	 Name 	 Class 	 Attendance
+================================
+33255 	 Shreyas 	 TE10 	 98
+33257 	 Sushant 	 TE10 	 90
+33262 	 Yash 	 TE10 	 88
+33258 	 Venkatesh 	 TE10 	 89
+33250 	 Saloni 	 TE10 	 99
+33256 Someshwar TE10 88

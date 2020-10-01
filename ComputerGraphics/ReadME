@@ -1,0 +1,10 @@
+The files <GL/gl.h>, <GL/glu.h> and <GL/glext.h> are replaced by <OpenGL/gl.h>, <OpenGL/glu.h> and <OpenGL/glext.h>. This is “Framework include” syntax. The actual files are in /System/Library/Frameworks/OpenGL.framework/Headers/ . If you’re doing a large port, it may be easiest to make symbolic links to these in /usr/local/include/GL/ …
+
+<GL/glut.h> is replaced by <GLUT/glut.h>, again a framework include.
+
+Rather than the -lGL -lGLU you’re used to, you need -framework OpenGL
+
+Rather than -lglut, you need -framework GLUT -framework Cocoa
+
+
+pass the option -Wno-deprecated-declarations to the compiler during the compile phase

@@ -1,0 +1,53 @@
+BL51 BANKED LINKER/LOCATER V6.02                                                        03/05/2020  11:33:58  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.02, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE Assignment7(iii).obj TO 23256_57 RAMSIZE (256)
+
+
+INPUT MODULES INCLUDED:
+  Assignment7(iii).obj (ASSIGNMENT7_III_)
+
+
+LINK MAP OF MODULE:  23256_57 (ASSIGNMENT7_III_)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0012H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  23256_57 (ASSIGNMENT7_III_)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ASSIGNMENT7_III_
+  C:0010H         SYMBOL        HERE
+  C:000AH         SYMBOL        LOOP
+  C:0003H         SYMBOL        START
+  C:0000H         LINE#         2
+  C:0003H         LINE#         6
+  C:0004H         LINE#         8
+  C:0006H         LINE#         9
+  C:0008H         LINE#         10
+  C:000AH         LINE#         12
+  C:000BH         LINE#         13
+  C:000CH         LINE#         14
+  C:000DH         LINE#         15
+  C:000EH         LINE#         16
+  C:0010H         LINE#         18
+  -------         ENDMOD        ASSIGNMENT7_III_
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0012H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=18
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

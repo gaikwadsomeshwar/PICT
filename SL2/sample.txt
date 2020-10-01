@@ -1,0 +1,27 @@
+echo 2. Add a new Attendance Record
+echo 4. Delete an Attendance Record
+      record[0]=Someshwar
+      record[1]=Shreyas
+      echo ${record[1]} ${record[0]}
+      echo Add a new Attendance Record: Option Selected
+      echo Delete an Attendance Record: Option Selected
+  echo 2. Add a new Attendance Record
+  echo 4. Delete an Attendance Record
+echo 2. Add a new Attendance Record
+echo 4. Delete an Attendance Record
+      record[0]=Someshwar
+      record[1]=Shreyas
+      echo ${record[1]} ${record[0]}
+      echo Add a new Attendance Record: Option Selected
+      echo Delete an Attendance Record: Option Selected
+  echo 2. Add a new Attendance Record
+  echo 4. Delete an Attendance Record
+
+filename=AttendanceRecord.txt
+echo 2. Add a new Attendance Record
+echo 4. Delete an Attendance Record
+echo 5. Display Attendance Record
+      echo Delete an Attendance Record: Option Selected
+  echo 2. Add a new Attendance Record
+  echo 4. Delete an Attendance Record
+  echo 5. Display Attendance Record
