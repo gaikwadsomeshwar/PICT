@@ -70,8 +70,10 @@ void *producer(void *arg) {
 
     printf("Thread ID: %d. Producer: %d",(int)pthread_self()%100,*(int*)arg);
     printf("\nProduced item %d at %d position\nBuffer:[ ",item%100,pos);
-    for(int i=0;i<BufferSize;i++)
+
+    for(int i=0;i<BufferSize;i++) {
       printf("%d ",buffer[i]);
+    }
     printf("]\n\n");
 
     sem_post(mutex);
@@ -94,13 +96,17 @@ void *consumer(void *arg) {
 
     printf("Thread ID: %d. Consumer: %d",(int)pthread_self()%100,*(int*)arg);
     printf("\nConsuming item %d from %d position\nBuffer:[ ",item,pos);
-    for(int i=0;i<BufferSize;i++)
+
+    for(int i=0;i<BufferSize;i++) {
       printf("%d ",buffer[i]);
+    }
     printf("]->[ ");
+
     buffer[pos]=0;
-    for(int i=0;i<BufferSize;i++)
+    for(int i=0;i<BufferSize;i++) {
       printf("%d ",buffer[i]);
     printf("]\n\n");
+    }
 
     sem_post(mutex);
     sem_post(empty);
