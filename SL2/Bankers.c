@@ -86,11 +86,15 @@ int resourceAlloc(int alloc[5][3],int max[5][3],int avail[3]) {
     }
   }
 
+  //requesting resources
+
   int req[5][3]={ {0,2,0},
                   {0,0,0},
                   {2,0,0},
                   {0,0,0},
                   {0,0,1} };
+
+  //resource request algorithm
 
   i=0;
   k=0;
