@@ -1,6 +1,6 @@
 delimiter //
 
-create trigger capitalize_name
+create TRIGGER capitalize_name
 before insert
 on customer for each row
 begin
