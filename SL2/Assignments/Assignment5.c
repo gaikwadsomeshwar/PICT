@@ -9,7 +9,7 @@ void *reader(void *arg);
 void *writer(void *arg);
 
 sem_t *resource;
-sem_t *rmutex;
+pthread_mutex_t rmutex;
 int readcount;
 
 int main() {
@@ -32,8 +32,8 @@ int main() {
   threadW=(pthread_t*)malloc(sizeof(pthread_t)*sizeW);
 
   //Creating semaphores
-  resource=sem_open("/resourceSem", O_CREAT, 0644, 1);
-  rmutex=sem_open("/mutexSem", O_CREAT, 0644, 1);
+  resource=sem_open("/resource", O_CREAT, 0644, 1);
+  pthread_mutex_init(&rmutex, NULL);
   readcount=0;
 
   //Function Calls
@@ -49,59 +49,48 @@ int main() {
     res=pthread_join(threadW[i], NULL);
 
   //destroying the semaphores
-  sem_unlink("/resourceSem");
-  sem_unlink("/mutexSem");
+  sem_close(resource);
+  pthread_mutex_destroy(&rmutex);
 
   exit(EXIT_SUCCESS);
 }
 
 void *reader(void *arg) {
 
-  while(1) {
-
-    //<Enter Critical Section>
-    sem_wait(rmutex);
-    readcount++;
-    if(readcount==1) {
-      sem_wait(resource);
-    }
-    //<Exit Critical Section>
-    sem_post(rmutex);
-
-    //Reading
-    printf("\nThread ID: %d. Reading data as: %d\n",(int)pthread_self()%100,*(int*)arg);
-
-    //<Enter Critical Section>
-    sem_wait(rmutex);
-    readcount--;
-    if(readcount==0) {
-      sem_post(resource);
-    }
-    //<Exit Critical Section>
-    sem_post(rmutex);
-
-    sleep(3);
+  //<Enter Critical Section>
+  pthread_mutex_lock(&rmutex);
+  readcount++;
+  if(readcount==1) {
+    sem_wait(resource);
   }
+  //<Exit Critical Section>
+  pthread_mutex_unlock(&rmutex);
+
+  //Reading
+  printf("\nThread ID: %d. Reading data as: %d\n",(int)pthread_self()%100,*(int*)arg);
+
+  //<Enter Critical Section>
+  pthread_mutex_lock(&rmutex);
+  readcount--;
+  if(readcount==0) {
+    sem_post(resource);
+  }
+  //<Exit Critical Section>
+  pthread_mutex_unlock(&rmutex);
   pthread_exit(NULL);
 }
 
 void *writer(void *arg) {
 
-  while(1) {
+  //<Enter Critical Section>
+  sem_wait(resource);
 
-    //<Enter Critical Section>
-    sem_wait(resource);
+  //Reading
+  printf("\nThread ID : %d. Data is: %d\n",(int)pthread_self()%100,*(int*)arg);
+  *(int*)arg+=2;
+  printf("Writing data as: %d\n",*(int*)arg);
 
-    //Reading
-    printf("\nThread ID: %d. Data is: %d\n",(int)pthread_self()%100,*(int*)arg);
-    printf("Enter Data: ");
-    scanf("%d",(int*)arg);
-    printf("Writing data as: %d",*(int*)arg);
-
-    //<Exit Critical Section>
-    sem_post(rmutex);
-
-    sleep(3);
-  }
+  //<Exit Critical Section>
+  sem_post(resource);
   pthread_exit(NULL);
 }
