@@ -17,11 +17,9 @@ int main() {
   int res,i,sizeR,sizeW,data;
   pthread_t *threadR,*threadW;
 
-  printf("\nData: ");
-  scanf("%d",&data);
-
+  data=rand()%100;
   //Accepting Number of Readers and Writers
-  printf("Number of Readers: ");
+  printf("\nNumber of Readers: ");
   scanf("%d",&sizeR);
 
   printf("Number of Writers: ");
@@ -57,43 +55,50 @@ int main() {
 
 void *reader(void *arg) {
 
-  //<Enter Critical Section>
-  pthread_mutex_lock(&rmutex);
-  readcount++;
-  if(readcount==1) {
-    sem_wait(resource);
+  while(1) {
+    //<Enter Critical Section>
+    pthread_mutex_lock(&rmutex);
+    readcount++;
+    if(readcount==1) {
+      sem_wait(resource);
+    }
+    //<Exit Critical Section>
+    pthread_mutex_unlock(&rmutex);
+
+    //Reading
+    printf("\n====================\n");
+    printf("\nThread ID      : %d\nReading data as: %d\n",(int)pthread_self()%10,*(int*)arg);
+    printf("\n====================\n");
+
+    //<Enter Critical Section>
+    pthread_mutex_lock(&rmutex);
+    readcount--;
+    if(readcount==0) {
+      sem_post(resource);
+    }
+    //<Exit Critical Section>
+    pthread_mutex_unlock(&rmutex);
+    sleep(5);
   }
-  //<Exit Critical Section>
-  pthread_mutex_unlock(&rmutex);
-
-  //Reading
-  printf("\nThread ID: %d. Reading data as: %d\n",(int)pthread_self()%100,*(int*)arg);
-
-  //<Enter Critical Section>
-  pthread_mutex_lock(&rmutex);
-  readcount--;
-  if(readcount==0) {
-    sem_post(resource);
-  }
-  //<Exit Critical Section>
-  pthread_mutex_unlock(&rmutex);
-
-  sleep(2);
   pthread_exit(NULL);
 }
 
 void *writer(void *arg) {
 
-  //<Enter Critical Section>
-  sem_wait(resource);
+  while(1) {
+    //<Enter Critical Section>
+    sem_wait(resource);
 
-  //Reading
-  printf("\nThread ID : %d. Data is: %d\n",(int)pthread_self()%100,*(int*)arg);
-  *(int*)arg+=2;
-  printf("Writing data as: %d\n",*(int*)arg);
+    //Writing
+    printf("\n====================\n");
+    printf("\nThread ID      : %d\nData is        : %d\n",(int)pthread_self()%10,*(int*)arg);
+    *(int*)arg=rand()%100;
+    printf("Writing data as: %d\n",*(int*)arg);
+    printf("\n====================\n");
 
-  //<Exit Critical Section>
-  sem_post(resource);
-  sleep(2);
+    //<Exit Critical Section>
+    sem_post(resource);
+    sleep(5);
+  }
   pthread_exit(NULL);
 }
