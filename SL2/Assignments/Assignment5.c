@@ -77,6 +77,8 @@ void *reader(void *arg) {
   }
   //<Exit Critical Section>
   pthread_mutex_unlock(&rmutex);
+
+  sleep(2);
   pthread_exit(NULL);
 }
 
@@ -92,5 +94,6 @@ void *writer(void *arg) {
 
   //<Exit Critical Section>
   sem_post(resource);
+  sleep(2);
   pthread_exit(NULL);
 }
