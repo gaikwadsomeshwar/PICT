@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gold Loan Page</title>
+  <script src="FormValidation.js" type="text/javascript" ></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body style="background-color: #D8D8D8; ">
+
+  <h1>Manokamana Finances</h1>
+  <h4>Fulfil your wishes...</h4>
+
+  <div class="topnav">
+    <a href="Homepage.html">Home</a>
+    <div class="dropdown">
+      <button class="dropbtn">Loans</button>
+      <div class="dropdown-content">
+        <a href="PersonalLoanpage.html">Personal Loan</a>
+        <a href="SeniorCitizenLoanpage.html">Senior Citizen Loan</a>
+        <a class="active" href="GoldLoanpage.html">Gold Loan</a>
+        <a href="HousingLoanpage.html">Housing Loan</a>
+        <a href="StudentLoanpage.html">Student Loan</a>
+        <a href="CarLoanpage.html">Car Loan</a>
+      </div>
+    </div>
+    <a href="ContactUspage.html">Contact Us</a>
+    <a href="Tutorialpage.html">Tutorial</a>
+  </div>
+
+  <div class="container">
+
+    <img src="images/Gold Loan.jpg" width="100%" height="700">
+    <div class="content">
+
+      <div class="formstyle">
+        <h2 style="text-align: center; margin-bottom: -5px; margin-top: -5px">Application Form</h2>
+        <form action="submitpage.html" onsubmit="return validateForm()">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="firstname" placeholder="Your first name..">
+
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+          <label for="email">Email ID:</label>
+          <input type="email" id="email" size="40" placeholder="Your email id..">
+
+          <label for="mobilno">Mobile No:</label>
+          <input type="text" id="mobileno" placeholder="Your mobile no..">
+
+          <label for="pincode">Pin Code:</label><br>
+          <input type="text" id="pincode" size="10" placeholder="Your zipcode..">
+
+          <label for="occupation">Occupation:</label><br>
+          <select id="occupation" name="occupation">
+            <option value="">Select Occupation..</option>
+            <option value=1>Self-Employed</option>
+            <option value=2>Employed</option>
+            <option value=3>Buisness</option>
+            <option value=4>Student</option>
+            <option value=5>Other</option>
+          </select>
+
+          <label for="income">Income:</label><br>
+          <input type="text" id="income" placeholder="Your income..">
+
+          <input type="submit" value="Apply Now">
+          <input type="reset" value="Reset">
+        </form>
+      </div>
+
+      <div style="float: left; font-size: 16pt; text-align: left; width: 50%; ">
+        <br><b>What is Gold Loan?</b><br><br>
+        Manokamana Finances offers loan against gold jewellery. A customer can quickly avail <br>of a Gold Loan for any value from Rs 10,000 to Rs 1 crore with simple and easy<br> documentation process.
+      </div>
+
+      <div style="float: left; font-size: 16pt; text-align: left; width: 50%;">
+        <br><b>Why Us?</b><br>
+        <ul>
+          <li>Instant Gold Loan</li>
+          <li>Attractive Interest rates</li>
+          <li>Quick and Easy Process</li>
+          <li>Short Tenures</li>
+          <li>Different modes for Quick Disbursal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

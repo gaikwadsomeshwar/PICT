@@ -37,7 +37,7 @@ int main() {
   //Function Calls
   for(i=0;i<N;i++) {
     res=pthread_create(thread[i],NULL,philosopher,&phil[i]);
-    printf("Philosopher %d is Thinking\n",i+1);
+    printf("\nPhilosopher %d is Thinking\n",i+1);
   }
   for(i=0;i<N;i++) {
     res=pthread_join(*thread[i],NULL);
@@ -66,7 +66,7 @@ void take_fork(int num) {
   pthread_mutex_lock(&mutex);
 
   state[num]=HUNGRY;
-  printf("Philosopher %d is Hungry\n",num+1);
+  printf("\nPhilosopher %d is Hungry\n",num+1);
   test(num);
 
   pthread_mutex_unlock(&mutex);
@@ -81,7 +81,7 @@ void put_fork(int num) {
 
   state[num]=THINKING;
 
-  printf("Philosopher %d putting fork %d and %d down\n",num+1,LEFT+1,num+1);
+  printf("\nPhilosopher %d putting fork %d and %d down\n",num+1,LEFT+1,num+1);
   printf("Philosopher %d is Thinking\n",num+1);
 
   test(LEFT);
