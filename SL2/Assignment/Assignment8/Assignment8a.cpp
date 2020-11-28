@@ -1,28 +1,76 @@
-//Writer Process
-#include <iostream>
+#include<iostream>
+#include <signal.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
-#include <stdio.h>
+#include <sys/types.h>
+#include <unistd.h>
 using namespace std;
+
+#define FILLED 0
+#define Ready 1
+#define NotReady -1
+
+struct memory {
+  char buff[100];
+  int status, pid1, pid2;
+};
+
+struct memory* shmptr;
+
+// handler function to print message received from user2
+
+void handler(int signum)
+{
+  // if signum is SIGUSR1, then user 1 is receiving a message from user2
+
+  if (signum == SIGUSR1) {
+    cout<<"User2: "<<shmptr->buff<<endl<<endl;
+  }
+}
 
 int main()
 {
-    // ftok to generate unique key
-    key_t key = ftok("shmfile",65);
+  // process id of user1
 
-    // shmget returns an identifier in shmid
-    int shmid = shmget(key,1024,0666|IPC_CREAT);
+  int pid = getpid();
 
-    // shmat to attach to shared memory
-    char *str = (char*) shmat(shmid,(void*)0,0);
+  int shmid;
 
-    cout<<"Write Data : ";
-    cin.get(str, 100);
+  // key value of shared memory
+  int key = 12345;
 
-    printf("Data written in memory: %s\n",str);
+  // shared memory create
+  shmid = shmget(key, sizeof(struct memory), IPC_CREAT | 0666);
 
-    //detach from shared memory
-    shmdt(str);
+  // attaching the shared memory
 
-    return 0;
+  shmptr = (struct memory*)shmat(shmid, NULL, 0);
+
+  // store the process id of user1 in shared memory
+  shmptr->pid1 = pid;
+  shmptr->status = NotReady;
+
+  // calling the signal function using signal type SIGUSER1
+  signal(SIGUSR1, handler);
+
+  while (1) {
+    while (shmptr->status != Ready)
+    continue;
+    sleep(1);
+
+    // taking input from user1
+
+    cout<<"User1: ";
+    cin.getline(shmptr->buff, 100);
+
+    shmptr->status = FILLED;
+
+    // sending the message to user2 using kill function
+
+    kill(shmptr->pid2, SIGUSR2);
+  }
+
+  shmdt((void*)shmptr);
+  shmctl(shmid, IPC_RMID, NULL);
+  return 0;
 }
