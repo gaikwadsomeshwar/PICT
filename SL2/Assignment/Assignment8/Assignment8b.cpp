@@ -1,3 +1,4 @@
+// user 2
 #include<iostream>
 #include <signal.h>
 #include <sys/ipc.h>
