@@ -1,0 +1,14 @@
+enable
+configure terminal
+hostname
+int fa0/0
+ip add 10.0.0.1 255.0.0.0
+no shut
+
+int s0/0
+ip add 
+clock rate
+no shut
+
+ip route dest. net_mask router
+
